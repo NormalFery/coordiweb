@@ -91,19 +91,22 @@
                 $postsocio = $pdo->query("SELECT COUNT(*) FROM ocio;");
                 $postsocio = $postsocio->fetchColumn();
                 // Y los sumamos
-                $posts = $postsocio + $postsigualdad + $postsformacion + $postsatencion + $postsatencion;
+                $posts = $postsocio + $postsigualdad + $postsformacion + $postsatencion + $postsempleo;
+                $test = 1 + 0 + 0 + 0 + 2;
                 // Echos de prueba.
-                echo("$posts");
-                echo("$postsatencion");
-                echo("$postsocio");
-                echo("$postsigualdad");
-                echo("$postsformacion");
-                echo("$postsempleo");
+                echo("POSTS = $posts <br>");
+                echo("POSTS ATENCION = $postsatencion<br>");
+                echo("POSTS OCIO = $postsocio <br>");
+                echo("POSTS IGUALDAD = $postsigualdad <br>");
+                echo("POSTS FORMACIÓN = $postsformacion <br>");
+                echo("POSTS EMPLEO = $postsempleo <br>");
+                echo("TEST = $test <br>");
                 // Y ponemos nuestro "postcount" a 0
                 $postcount = 0;
                 echo("PREWHILETEST");
                 // Vamos contando cuantos posts llevamos, desde el primero
-                while ($posts >= $postcount) {
+                while ($posts > $postcount) {
+
                     if ($rightimage <= 0) {
                     echo("<div class='card mb-3' style='max-width: 100%;'>");
                 echo("<div class='row g-0'>");
@@ -164,49 +167,6 @@
                 }
 
             ?>
-            <!-- Proyectos de muestra -->
-            <div class="card mb-3" style="max-width: 100%;">
-                <div class="row g-0">
-                    <div class="col-md-4">
-                        <img src="assets/img" class="img-fluid rounded-start" alt="Imagen de ejemplo">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">Proyecto Especial</h5>
-                            <p class="card-text">Esta es una tarjeta más amplia con texto de apoyo a continuación como una introducción natural a contenido adicional. Este contenido es un poco más largo para mostrar cómo se vería un Proyecto con imagen lateral.</p>
-                            <p class="card-text"><small class="text-muted">Última actualización hace 20 minutos</small></p>
-                            <div class="d-flex">
-                                <a href="#" class="btn btn-outline-primary me-2">Leer más</a>
-                                <button class="btn btn-outline-danger btn-delete-featured" data-id="sample1">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card mb-3" style="max-width: 100%;">
-                <div class="row g-0">
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">Otro Proyecto Especial</h5>
-                            <p class="card-text">Esta es una tarjeta más amplia con texto de apoyo a continuación como una introducción natural a contenido adicional. Este Proyecto tiene la imagen en el lado derecho para variedad.</p>
-                            <p class="card-text"><small class="text-muted">Última actualización hace 30 minutos</small></p>
-                            <div class="d-flex">
-                                <a href="#" class="btn btn-outline-primary me-2">Leer más</a>
-                                <button class="btn btn-outline-danger btn-delete-featured" data-id="sample2">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <img src="assets/img/" class="img-fluid rounded-end" alt="Imagen de ejemplo">
-                    </div>
-                </div>
-            </div>
-        </div>
     </section>
 
     <!-- Sección de tarjetas dinámicas (agregadas por el usuario) -->
