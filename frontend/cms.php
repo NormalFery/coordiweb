@@ -63,6 +63,107 @@
 
         <!-- Contenedor para Proyectos destacados -->
         <div id="featured-articles-container">
+            <?php
+            // Por si acaso, requerimos la lógica de CMS tambien
+            require_once './cms_logic.php';
+            // CREDENCIALES DE PRUEBAS, NO PARA PRODUCCION
+             $username = "fery";
+            $password = "pruebas456";
+            // Nos conectamos a la BB.DD. con las credenciales especificadas anteriormente
+            $pdo = new PDO("mysql:host=localhost", $username, $password);
+            // Cambiamos los errores a Exceptions
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            // Utilizamos la BB.DD. creada por cms_logic (SIEMPRE HAY QUE IR A CMS_LOGIC
+            $pdo->query("USE coordicms");
+            $dom = new DOMDocument();
+            // Creamos la variable para especificar donde está la imagen
+            $rightimage = 0;
+
+            // Obtenemos la cantidad de Posts que hay en cada tabla
+                $postsatencion = $pdo->query("SELECT COUNT(*) FROM atencion;");
+                $postsatencion = $postsatencion->fetchColumn();
+                $postsempleo = $pdo->query("SELECT COUNT(*) FROM empleo;");
+                $postsempleo = $postsempleo->fetchColumn();
+                $postsigualdad = $pdo->query("SELECT COUNT(*) FROM igualdad;");
+                $postsigualdad = $postsigualdad->fetchColumn();
+                $postsformacion = $pdo->query("SELECT COUNT(*) FROM formacion;");
+                $postsformacion = $postsformacion->fetchColumn();
+                $postsocio = $pdo->query("SELECT COUNT(*) FROM ocio;");
+                $postsocio = $postsocio->fetchColumn();
+                // Y los sumamos
+                $posts = $postsocio + $postsigualdad + $postsformacion + $postsatencion + $postsatencion;
+                // Echos de prueba.
+                echo("$posts");
+                echo("$postsatencion");
+                echo("$postsocio");
+                echo("$postsigualdad");
+                echo("$postsformacion");
+                echo("$postsempleo");
+                // Y ponemos nuestro "postcount" a 0
+                $postcount = 0;
+                echo("PREWHILETEST");
+                // Vamos contando cuantos posts llevamos, desde el primero
+                while ($posts >= $postcount) {
+                    if ($rightimage <= 0) {
+                    echo("<div class='card mb-3' style='max-width: 100%;'>");
+                echo("<div class='row g-0'>");
+                    echo("<div class='col-md-4'>");
+                        echo("<img src='assets/img' class='img-fluid rounded-start' alt='Imagen de ejemplo'>");
+                    echo("</div>");
+                    echo("<div class='col-md-8'>");
+                    echo("<div class='card-body'>");
+                            echo("<h5 class='card-title'>Proyecto Especial</h5>");
+                            echo("<p class='card-text'>Esta es una tarjeta más amplia con texto de apoyo a continuación como una introducción natural a contenido adicional. Este contenido es un poco más largo para mostrar cómo se vería un Proyecto con imagen lateral.</p>");
+                            echo("<p class='card-text'><small class='text-muted'>Última actualización hace 20 minutos</small></p>");
+                            echo("<div class='d-flex'>");
+                                echo("<a href='#' class='btn btn-outline-primary me-2'>Leer más</a>");
+                    echo("<button class='btn btn-outline-danger btn-delete-featured' data-id='sample1'>");
+                                    echo("<i class='fas fa-trash'></i>");
+                                echo("</button>");
+                            echo("</div>");
+                    echo("</div>");
+                    echo("</div>");
+                    echo("</div>");
+                    echo("</div>");
+                    // Empezamos a la izquierda, y al siguiente, vamos a la derecha
+                    $rightimage++;
+                    } else {
+                        echo("<div class='card mb-3' style='max-width: 100%;'>");
+                        echo("<div class='row g-0'>");
+                        echo("<div class='col-md-8'>");
+                        echo("<div class='card-body'>");
+                        echo("<h5 class='card-title'>Proyecto Especial</h5>");
+                        echo("<p class='card-text'>Esta es una tarjeta más amplia con texto de apoyo a continuación como una introducción natural a contenido adicional. Este contenido es un poco más largo para mostrar cómo se vería un Proyecto con imagen lateral.</p>");
+                        echo("<p class='card-text'><small class='text-muted'>Última actualización hace 20 minutos</small></p>");
+                        echo("<div class='d-flex'>");
+                        echo("<a href='#' class='btn btn-outline-primary me-2'>Leer más</a>");
+                        echo("<button type='submit' name='delete_button' class='btn btn-outline-danger btn-delete-featured' data-id='sample1'>");
+                        echo("<i class='fas fa-trash'></i>");
+                        echo("</button>");
+                        echo("</div>");
+                        echo("</div>");
+                        echo("</div>");
+                        echo("<div class='col-md-4'>");
+                        echo("<img src='assets/img' class='img-fluid rounded-start' alt='Imagen de ejemplo'>");
+                        echo("</div>");
+                        echo("</div>");
+                        echo("</div>");
+                        // En la derecha, volvemos a la izquierda
+                        $rightimage = $rightimage - 1;
+                    }
+
+                    //Y, da igual donde estemos, añadimos 1 a post count hasta terminar
+                    $postcount++;
+
+                }
+                // Echo de prueba
+                echo("WHILEDONE");
+                // Lógica sin terminar.
+                if (isset($_POST['delete_button'])) {
+                    echo("TO BE FINISHED");
+                }
+
+            ?>
             <!-- Proyectos de muestra -->
             <div class="card mb-3" style="max-width: 100%;">
                 <div class="row g-0">
@@ -186,18 +287,18 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="newCardForm">
+                <form action="formhandler.php" method="POST" id="newCardForm">
                     <div class="mb-3">
                         <label for="newCardTitle" class="form-label">Título del Proyecto</label>
-                        <input type="text" class="form-control" id="newCardTitle" required placeholder="Ej: Proyecto Laurisilva">
+                        <input type="text" name="pname" class="form-control" id="newCardTitle" required placeholder="Ej: Proyecto Laurisilva">
                     </div>
                     <div class="mb-3">
                         <label for="newCardContent" class="form-label">Descripción</label>
-                        <textarea class="form-control" id="newCardContent" required rows="3" placeholder="Ej: Un breve ejemplo de contenido para este proyecto..."></textarea>
+                        <textarea class="form-control" name="pdesc" id="newCardContent" required rows="3" placeholder="Ej: Un breve ejemplo de contenido para este proyecto..."></textarea>
                     </div>
                     <div class="mb-3">
                         <label for="newcardSection" class="form-label">Sección del Proyecto</label>
-                        <select class="form-select" id="newcardSection" required>
+                        <select class="form-select" name="parea" id="newcardSection" required>
                             <option selected disabled value="">Seleccione...</option>
                             <option value="integral.html">Atención Integral</option>
                             <option value="ocio.html">Ocio y Tiempo Libre</option>
@@ -208,8 +309,8 @@
                         <div class="form-text">No dejes sin seleccionar o no aparecerá</div>
                     </div>
                     <div class="mb-3">
-                        <label for="newCardImage" class="form-label">URL de la imagen</label>
-                        <input type="text" class="form-control" id="newCardImage" placeholder="URL de la imagen (opcional)">
+                        <label for="newCardImage"  class="form-label">URL de la imagen</label>
+                        <input type="text" class="form-control" name="pimage" id="newCardImage" placeholder="URL de la imagen (opcional)">
                         <div class="form-text">Deja en blanco para usar una imagen predeterminada</div>
                     </div>
                 </form>
@@ -229,7 +330,7 @@
 <!-- JavaScript modular para el CMS -->
 <script src="assets/cms/js/utils.js"></script>
 <script src="assets/cms/js/project.js"></script>
-<script src="assets/cms/js/featured.js"></script>
+<!--<script src="assets/cms/js/featured.js"></script>-->
 <script src="assets/cms/js/app.js"></script>
 </body>
 </html>
