@@ -17,6 +17,8 @@
 	<link href="../assets/css/my.css" rel="stylesheet" />
 	<link href="../assets/css/ocio.css" rel="stylesheet" />
 	<link rel="stylesheet" href="../assets/cms/css/cms.css" />
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<link rel="stylesheet" href="../assets/cms/css/cms.css" />
 	<!-- ================== END core-css ================== -->
 </head>
 <body data-bs-spy='scroll' data-bs-target='#header' data-bs-offset='51'>
