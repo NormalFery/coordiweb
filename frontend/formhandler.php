@@ -9,19 +9,24 @@ $pdo->query("USE coordicms;");
 
 switch ($_POST["parea"]) {
     case "integral.html":
-        $pdo->query("INSERT INTO atencion (PostTitle, PostDescription, ImageLink) VALUES ('$_POST[pname]', '$_POST[pdesc]', '$_POST[pimage]');");
+        $time = date('Y-m-d H:i:s');
+        $pdo->query("INSERT INTO atencion (PostTitle, PostDescription, ImageLink, PostDate) VALUES ('$_POST[pname]', '$_POST[pdesc]', '$_POST[pimage]', '$time');");
         break;
     case "ocio.html":
-        $pdo->query("INSERT INTO ocio (PostTitle, PostDescription, ImageLink) VALUES ('$_POST[pname]', '$_POST[pdesc]', '$_POST[pimage]');");
+        $time = date('Y-m-d H:i:s');
+        $pdo->query("INSERT INTO ocio (PostTitle, PostDescription, ImageLink, PostDate) VALUES ('$_POST[pname]', '$_POST[pdesc]', '$_POST[pimage]', '$time');");
         break;
     case "empleo.html":
-        $pdo->query("INSERT INTO empleo (PostTitle, PostDescription, ImageLink) VALUES ('$_POST[pname]', '$_POST[pdesc]', '$_POST[pimage]');");
+        $time = date('Y-m-d H:i:s');
+        $pdo->query("INSERT INTO empleo (PostTitle, PostDescription, ImageLink, PostDate) VALUES ('$_POST[pname]', '$_POST[pdesc]', '$_POST[pimage]', '$time');");
         break;
     case "formacion.html":
-        $pdo->query("INSERT INTO formacion (PostTitle, PostDescription, ImageLink) VALUES ('$_POST[pname]', '$_POST[pdesc]', '$_POST[pimage]');");
+        $time = date('Y-m-d H:i:s');
+        $pdo->query("INSERT INTO formacion (PostTitle, PostDescription, ImageLink, PostDate) VALUES ('$_POST[pname]', '$_POST[pdesc]', '$_POST[pimage]', '$time');");
         break;
     case "Igualdad.html":
-        $pdo->query("INSERT INTO igualdad (PostTitle, PostDescription, ImageLink) VALUES ('$_POST[pname]', '$_POST[pdesc]', '$_POST[pimage]');");
+        $time = date('Y-m-d H:i:s');
+        $pdo->query("INSERT INTO igualdad (PostTitle, PostDescription, ImageLink, PostDate) VALUES ('$_POST[pname]', '$_POST[pdesc]', '$_POST[pimage]', '$time');");
         break;
         default:
             break;

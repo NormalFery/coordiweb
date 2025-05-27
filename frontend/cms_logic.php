@@ -14,11 +14,11 @@ $dbname = "`".str_replace("`","``",$dbname)."`";
 $pdo->query("CREATE DATABASE IF NOT EXISTS $dbname");
 $pdo->query("use $dbname");
 // Si las tablas no existen, las creamos tambien
-$pdo->query("CREATE TABLE IF NOT EXISTS Ocio(PostId int NOT NULL AUTO_INCREMENT,PostTitle varchar(255),PostDescription varchar(1024),ImageLink varchar(255),PRIMARY KEY (PostId));");
-$pdo->query("CREATE TABLE IF NOT EXISTS Empleo(PostId int NOT NULL AUTO_INCREMENT,PostTitle varchar(255),PostDescription varchar(1024),ImageLink varchar(255),PRIMARY KEY (PostId));");
-$pdo->query("CREATE TABLE IF NOT EXISTS Formacion(PostId int NOT NULL AUTO_INCREMENT,PostTitle varchar(255),PostDescription varchar(1024),ImageLink varchar(255),PRIMARY KEY (PostId));");
-$pdo->query("CREATE TABLE IF NOT EXISTS Igualdad(PostId int NOT NULL AUTO_INCREMENT,PostTitle varchar(255),PostDescription varchar(1024),ImageLink varchar(255),PRIMARY KEY (PostId));");
-$pdo->query("CREATE TABLE IF NOT EXISTS Atencion(PostId int NOT NULL AUTO_INCREMENT,PostTitle varchar(255),PostDescription varchar(1024),ImageLink varchar(255),PRIMARY KEY (PostId));");
+$pdo->query("CREATE TABLE IF NOT EXISTS Ocio(PostId int NOT NULL AUTO_INCREMENT,PostTitle varchar(255),PostDescription varchar(1024),ImageLink varchar(255),PostDate DATETIME,PRIMARY KEY (PostId));");
+$pdo->query("CREATE TABLE IF NOT EXISTS Empleo(PostId int NOT NULL AUTO_INCREMENT,PostTitle varchar(255),PostDescription varchar(1024),ImageLink varchar(255),PostDate DATETIME,PRIMARY KEY (PostId));");
+$pdo->query("CREATE TABLE IF NOT EXISTS Formacion(PostId int NOT NULL AUTO_INCREMENT,PostTitle varchar(255),PostDescription varchar(1024),ImageLink varchar(255),PostDate DATETIME,PRIMARY KEY (PostId));");
+$pdo->query("CREATE TABLE IF NOT EXISTS Igualdad(PostId int NOT NULL AUTO_INCREMENT,PostTitle varchar(255),PostDescription varchar(1024),ImageLink varchar(255),PostDate DATETIME,PRIMARY KEY (PostId));");
+$pdo->query("CREATE TABLE IF NOT EXISTS Atencion(PostId int NOT NULL AUTO_INCREMENT,PostTitle varchar(255),PostDescription varchar(1024),ImageLink varchar(255),PostDate DATETIME,PRIMARY KEY (PostId));");
 // Y por último, requerimos la página bonita sin la lógica
 require_once './cms.php';
 ?>

@@ -64,8 +64,65 @@
         <!-- Contenedor para Proyectos destacados -->
         <div id="featured-articles-container">
             <?php
-            // Por si acaso, requerimos la lógica de CMS tambien
+            function renderLeft($k1, $k2, $k3, $k4, $k5, $k6): void {
+                echo("<form method='POST'>"); // <-- FORMULARIO
+                echo("<input type='hidden' name='post_id' value='$k5'>");
+                echo("<input type='hidden' name='post_tabla' value='$k6'>");
+                echo("<div class='card mb-3' style='max-width: 100%;'>");
+                echo("<div class='row g-0'>");
+                echo("<div class='col-md-4'>");
+                echo("<img src='$k4' class='img-fluid rounded-start' alt='Imagen de ejemplo'>");
+                echo("</div>");
+                echo("<div class='col-md-8'>");
+                echo("<div class='card-body'>");
+                echo("<h5 class='card-title'>$k1</h5>");
+                echo("<p class='card-text'>$k2</p>");
+                echo("<p class='card-text'><small class='text-muted'>Última actualización $k3</small></p>");
+                echo("<div class='d-flex'>");
+                echo("<a href='#' class='btn btn-outline-primary me-2'>Leer más</a>");
+                echo("<button type='submit' name='delete_button' class='btn btn-outline-danger btn-delete-featured'>");
+                echo("<i class='fas fa-trash'></i>");
+                echo("</button>");
+                echo("</div>");
+                echo("</div>");
+                echo("</div>");
+                echo("</div>");
+                echo("</div>");
+                echo("</form>");
+            }
+
+            function renderRight($k1, $k2, $k3, $k4, $k5, $k6): void {
+                echo("<form method='POST'>"); // <-- FORMULARIO
+                echo("<input type='hidden' name='post_id' value='$k5'>");
+                echo("<input type='hidden' name='post_tabla' value='$k6'>");
+                echo("<div class='card mb-3' style='max-width: 100%;'>");
+                echo("<div class='row g-0'>");
+                echo("<div class='col-md-8'>");
+                echo("<div class='card-body'>");
+                echo("<h5 class='card-title'>$k1</h5>");
+                echo("<p class='card-text'>$k2</p>");
+                echo("<p class='card-text'><small class='text-muted'>Última actualización $k3</small></p>");
+                echo("<div class='d-flex'>");
+                echo("<button type='submit' name='delete_button' class='btn btn-outline-danger btn-delete-featured'>");
+                echo("<i class='fas fa-trash'></i>");
+                echo("</button>");
+                echo("</button>");
+                echo("</div>");
+                echo("</div>");
+                echo("</div>");
+                echo("<div class='col-md-4'>");
+                echo("<img src='$k4' class='img-fluid rounded-start' alt='Imagen de ejemplo'>");
+                echo("</div>");
+                echo("</div>");
+                echo("</div>");
+                echo("</form>");
+            }
+
+
+            // Por si acaso, requerimos la lógica de CMS también
             require_once './cms_logic.php';
+
+
             // CREDENCIALES DE PRUEBAS, NO PARA PRODUCCION
              $username = "fery";
             $password = "pruebas456";
@@ -75,96 +132,47 @@
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             // Utilizamos la BB.DD. creada por cms_logic (SIEMPRE HAY QUE IR A CMS_LOGIC
             $pdo->query("USE coordicms");
-            $dom = new DOMDocument();
-            // Creamos la variable para especificar donde está la imagen
-            $rightimage = 0;
+            // Listamos las tablas por si hay expansión
+            $tablas = ['atencion', 'empleo', 'igualdad', 'formacion', 'ocio'];
+            // Para evitar errores, ponemos este código aqui. Si no, causamos un error por que los headers ya están listos.
+            if (isset($_POST['delete_button'])) {
+                $id = $_POST['post_id'];
+                $tabla = $_POST['post_tabla'];
 
-            // Obtenemos la cantidad de Posts que hay en cada tabla
-                $postsatencion = $pdo->query("SELECT COUNT(*) FROM atencion;");
-                $postsatencion = $postsatencion->fetchColumn();
-                $postsempleo = $pdo->query("SELECT COUNT(*) FROM empleo;");
-                $postsempleo = $postsempleo->fetchColumn();
-                $postsigualdad = $pdo->query("SELECT COUNT(*) FROM igualdad;");
-                $postsigualdad = $postsigualdad->fetchColumn();
-                $postsformacion = $pdo->query("SELECT COUNT(*) FROM formacion;");
-                $postsformacion = $postsformacion->fetchColumn();
-                $postsocio = $pdo->query("SELECT COUNT(*) FROM ocio;");
-                $postsocio = $postsocio->fetchColumn();
-                // Y los sumamos
-                $posts = $postsocio + $postsigualdad + $postsformacion + $postsatencion + $postsempleo;
-                $test = 1 + 0 + 0 + 0 + 2;
-                // Echos de prueba.
-                echo("POSTS = $posts <br>");
-                echo("POSTS ATENCION = $postsatencion<br>");
-                echo("POSTS OCIO = $postsocio <br>");
-                echo("POSTS IGUALDAD = $postsigualdad <br>");
-                echo("POSTS FORMACIÓN = $postsformacion <br>");
-                echo("POSTS EMPLEO = $postsempleo <br>");
-                echo("TEST = $test <br>");
-                // Y ponemos nuestro "postcount" a 0
-                $postcount = 0;
-                echo("PREWHILETEST");
-                // Vamos contando cuantos posts llevamos, desde el primero
-                while ($posts > $postcount) {
-
-                    if ($rightimage <= 0) {
-                    echo("<div class='card mb-3' style='max-width: 100%;'>");
-                echo("<div class='row g-0'>");
-                    echo("<div class='col-md-4'>");
-                        echo("<img src='assets/img' class='img-fluid rounded-start' alt='Imagen de ejemplo'>");
-                    echo("</div>");
-                    echo("<div class='col-md-8'>");
-                    echo("<div class='card-body'>");
-                            echo("<h5 class='card-title'>Proyecto Especial</h5>");
-                            echo("<p class='card-text'>Esta es una tarjeta más amplia con texto de apoyo a continuación como una introducción natural a contenido adicional. Este contenido es un poco más largo para mostrar cómo se vería un Proyecto con imagen lateral.</p>");
-                            echo("<p class='card-text'><small class='text-muted'>Última actualización hace 20 minutos</small></p>");
-                            echo("<div class='d-flex'>");
-                                echo("<a href='#' class='btn btn-outline-primary me-2'>Leer más</a>");
-                    echo("<button class='btn btn-outline-danger btn-delete-featured' data-id='sample1'>");
-                                    echo("<i class='fas fa-trash'></i>");
-                                echo("</button>");
-                            echo("</div>");
-                    echo("</div>");
-                    echo("</div>");
-                    echo("</div>");
-                    echo("</div>");
-                    // Empezamos a la izquierda, y al siguiente, vamos a la derecha
-                    $rightimage++;
-                    } else {
-                        echo("<div class='card mb-3' style='max-width: 100%;'>");
-                        echo("<div class='row g-0'>");
-                        echo("<div class='col-md-8'>");
-                        echo("<div class='card-body'>");
-                        echo("<h5 class='card-title'>Proyecto Especial</h5>");
-                        echo("<p class='card-text'>Esta es una tarjeta más amplia con texto de apoyo a continuación como una introducción natural a contenido adicional. Este contenido es un poco más largo para mostrar cómo se vería un Proyecto con imagen lateral.</p>");
-                        echo("<p class='card-text'><small class='text-muted'>Última actualización hace 20 minutos</small></p>");
-                        echo("<div class='d-flex'>");
-                        echo("<a href='#' class='btn btn-outline-primary me-2'>Leer más</a>");
-                        echo("<button type='submit' name='delete_button' class='btn btn-outline-danger btn-delete-featured' data-id='sample1'>");
-                        echo("<i class='fas fa-trash'></i>");
-                        echo("</button>");
-                        echo("</div>");
-                        echo("</div>");
-                        echo("</div>");
-                        echo("<div class='col-md-4'>");
-                        echo("<img src='assets/img' class='img-fluid rounded-start' alt='Imagen de ejemplo'>");
-                        echo("</div>");
-                        echo("</div>");
-                        echo("</div>");
-                        // En la derecha, volvemos a la izquierda
-                        $rightimage = $rightimage - 1;
-                    }
-
-                    //Y, da igual donde estemos, añadimos 1 a post count hasta terminar
-                    $postcount++;
-
+                if (in_array($tabla, $tablas)) { // Validamos la tabla por seguridad
+                    $stmt = $pdo->prepare("DELETE FROM $tabla WHERE PostId = :id");
+                    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+                    $stmt->execute();
+                    // Recargar para reflejar los cambios
+                    header("Location: " . $_SERVER['PHP_SELF']);
+                    exit;
+                } else {
+                    echo "Tabla no permitida.";
                 }
-                // Echo de prueba
-                echo("WHILEDONE");
-                // Lógica sin terminar.
-                if (isset($_POST['delete_button'])) {
-                    echo("TO BE FINISHED");
+            }
+            // Creamos un array para guardar todos los posts.
+            $allPosts = [];
+
+            // Vamos por cada tabla del array, y vamos guardando todos los resultados, combinandolos en el array.
+            foreach ($tablas as $tabla) {
+                $stmt = $pdo->prepare("SELECT PostId, PostTitle, PostDescription, PostDate, ImageLink, '$tabla' as Tabla FROM $tabla");
+                $stmt->execute();
+                $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                $allPosts = array_merge($allPosts, $rows);
+            }
+
+            // Mejor lógica de izquierda y derecha.
+            $rightimage = false;
+            foreach ($allPosts as $post) {
+                if ($rightimage) {
+                    renderRight($post['PostTitle'], $post['PostDescription'], $post['PostDate'], $post['ImageLink'], $post['PostId'],$post['Tabla']);
+                } else {
+                    renderLeft($post['PostTitle'], $post['PostDescription'], $post['PostDate'], $post['ImageLink'], $post['PostId'],$post['Tabla']);
                 }
+                $rightimage = !$rightimage;
+            }
+
+
 
             ?>
     </section>
