@@ -44,10 +44,10 @@
           <li class="nav-item dropdown">
             <a class="nav-link active" href="../index.html#areas">ÁREAS <b class="caret"></b></a>
             <div class="dropdown-menu dropdown-menu-left animate__animated animate__fadeInDown">
-              <a class="dropdown-item text-white" href="integral.html">ATENCIÓN INTEGRAL</a>
-              <a class="dropdown-item text-white" href="ocio.html">OCIO Y TIEMPO LIBRE</a>
-              <a class="dropdown-item text-white" href="empleo.html">EMPLEO</a>
-              <a class="dropdown-item text-white" href="Igualdad.html">MUJER E IGUALDAD</a>
+              <a class="dropdown-item text-white" href="integral.php">ATENCIÓN INTEGRAL</a>
+              <a class="dropdown-item text-white" href="ocio.php">OCIO Y TIEMPO LIBRE</a>
+              <a class="dropdown-item text-white" href="empleo.php">EMPLEO</a>
+              <a class="dropdown-item text-white" href="Igualdad.php">MUJER E IGUALDAD</a>
               <a class="dropdown-item text-white" href="formacion.html">FORMACIÓN E INNOVACIÓN</a>
             </div>
           </li>
@@ -112,88 +112,84 @@
         La Coordinadora de Personas con Discapacidad Física de Canarias tiene varios proyectos relacionados con el área de Formación para diseñar acciones formativas y de orientación que se adapten a las características específicas de las personas con discapacidad, como:
       </p>
       <div id="featured-articles-container">
+          <?php
+          function renderLeft($k1, $k2, $k3, $k4): void {
+              echo("<div class='card mb-3' style='max-width: 100%;'>");
+              echo("<div class='row g-0'>");
+              echo("<div class='col-md-4'>");
+              echo("<img src='$k4' class='img-fluid rounded-start' alt='Imagen de ejemplo'>");
+              echo("</div>");
+              echo("<div class='col-md-8'>");
+              echo("<div class='card-body'>");
+              echo("<h5 class='card-title'>$k1</h5>");
+              echo("<p class='card-text'>$k2</p>");
+              echo("<p class='card-text'><small class='text-muted'>Última actualización $k3</small></p>");
+              echo("<div class='d-flex'>");
+              echo("<a href='#' class='btn btn-outline-primary me-2'>Leer más</a>");
+              echo("</div>");
+              echo("</div>");
+              echo("</div>");
+              echo("</div>");
+              echo("</div>");
+          }
 
+          function renderRight($k1, $k2, $k3, $k4): void {
+              echo("<div class='card mb-3' style='max-width: 100%;'>");
+              echo("<div class='row g-0'>");
+              echo("<div class='col-md-8'>");
+              echo("<div class='card-body'>");
+              echo("<h5 class='card-title'>$k1</h5>");
+              echo("<p class='card-text'>$k2</p>");
+              echo("<p class='card-text'><small class='text-muted'>Última actualización $k3</small></p>");
+              echo("<div class='d-flex'>");
+              echo("<a href='#' class='btn btn-outline-primary me-2'>Leer más</a>");
+              echo("</div>");
+              echo("</div>");
+              echo("</div>");
+              echo("<div class='col-md-4'>");
+              echo("<img src='$k4' class='img-fluid rounded-start' alt='Imagen de ejemplo'>");
+              echo("</div>");
+              echo("</div>");
+              echo("</div>");
+          }
+
+          // CREDENCIALES DE PRUEBAS, NO PARA PRODUCCION
+          $username = "fery";
+          $password = "pruebas456";
+          // Nos conectamos a la BB.DD. con las credenciales especificadas anteriormente
+          $pdo = new PDO("mysql:host=localhost", $username, $password);
+          // Cambiamos los errores a Exceptions
+          $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+          // Utilizamos la BB.DD. creada por cms_logic (SIEMPRE HAY QUE IR A CMS_LOGIC
+          $pdo->query("USE coordicms");
+          // Como solo tenemos una tabla por página, solo buscamos las cosas de dicha página
+          $tablas = ['formacion'];
+
+          // Creamos un array para guardar todos los posts.
+          $allPosts = [];
+
+          // Vamos por cada tabla del array, y vamos guardando todos los resultados, combinandolos en el array.
+          foreach ($tablas as $tabla) {
+              $stmt = $pdo->prepare("SELECT PostTitle, PostDescription, PostDate, ImageLink FROM $tabla");
+              $stmt->execute();
+              $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+              $allPosts = array_merge($allPosts, $rows);
+          }
+
+          // Mejor lógica de izquierda y derecha.
+          $rightimage = false;
+          foreach ($allPosts as $post) {
+              if ($rightimage) {
+                  renderRight($post['PostTitle'], $post['PostDescription'], $post['PostDate'], $post['ImageLink']);
+              } else {
+                  renderLeft($post['PostTitle'], $post['PostDescription'], $post['PostDate'], $post['ImageLink']);
+              }
+              $rightimage = !$rightimage;
+          }
+
+          ?>
       </div>
-      <!--<div class="row seccion-destacada align-items-center">
-        &lt;!&ndash; Estatutos &ndash;&gt;
-        <div class="col-md-6" id="veril">
-          <div class="service text-center align-items-center">
-            <div class="info">
-              <h1 class="title">Proyecto Veril</h1>
-              <h3>
-                Programa de formación a personas con discapacidad.
-              </h3>
-              <p>Proyecto Veril tiene como finalidad el fomento de la empleabilidad de las personas con discapacidad, a través de acciones formativas personalizadas.
-                En esta edición, se atenderá a 15 usuarios, que recibirán formación en el Certificado de profesionalidad Operaciones Auxiliares de Servicios Administrativos
-                y Generales y realizarán prácticas en empresas. Serán en total 886 horas desde el 03 de junio de 2021 hasta el 02 de marzo de 2022.
-                <br>
-                <br>
-                Este proyecto permite dotar de conocimientos técnicos a los alumnos inscritos,
-                mejorando a su vez las habilidades socioprofesionales y actitudinales para contribuir a su acceso al empleo,
-                consiguiendo aumentar la cuota de igualdad de oportunidades y con ella una mayor integración social.
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6">
 
-              <img src="../assets/img/formacion/Veril_Logo.png" class="img-fluid rounded" alt="">
-
-        </div>
-
-        &lt;!&ndash; Ley Orgánica 1/2002 &ndash;&gt;
-
-        <div class="col-md-6">
-          <div class="service text-center">
-            <div class="info">
-              <h1 class="title">Tenerife Joven y Educa</h1>
-              <h4>
-                Formación Adaptada para personas con discapacidad.
-                <br />
-
-              </h4>
-              <p>Desde la Dirección Insular de Juventud y de Educación del Cabildo de Tenerife enmarcada en el Área de Educación ,
-                Juventud y Deportes se desarrolla el Proyecto ESCUELA TENERIFE JOVEN INCLUYE,
-                un proyecto de Formación Adaptada para Personas con Discapacidad a través de cursos presenciales y virtuales.
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 " id="joven">
-          <div class="service text-center">
-            <div class="image">
-              <img src="../assets/img/formacion/Tenerife_Joven_Poster.jpg" class="img-fluid rounded" alt="">
-            </div>
-          </div>
-        </div>
-
-        &lt;!&ndash; Ley 4/2003 &ndash;&gt;
-        <div class="col-md-6" id="alfabeto">
-          <div class="service text-center">
-            <div class="info">
-              <h1 class="title">Alfabetización Digital</h1>
-              <h3>
-                Proyecto de Intermediación laboral.
-
-              </h3>
-              <p>Proyecto por el que CoordiCanarias apuesta por la normalización en el uso y manejo de las TICs, dirigido a personas con discapacidad que se encuentran
-                con mayores dificultades a la hora de acceder a las nuevas tecnologías.
-              <br>
-                <br>
-                Algunos de los objetivos fundamentales de este proyecto son proporcionar las herramientas y estrategias adecuadas para la gestión de acceso a las TICs
-                y lograr una comodidad por parte de los participantes en el uso de este tipo de comunicación disminuyendo en la brecha digital del colectivo a través de
-                la práctica de una alfabetización digital,</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="service text-center">
-            <div class="image">
-              <img src="../assets/img/formacion/Alfabeto_Logo.png" class="img-fluid rounded" alt="">
-            </div>
-          </div>
-        </div>
-
-      </div>-->
       <div id="team" class="content" data-scrollview="true">
         <!-- begin container -->
         <div class="container">
@@ -390,7 +386,7 @@
   <script src="../assets/js/app.js"></script>
   <script src="../assets/js/theme-panel-enhance.js"></script>
 
-  <script src="../assets/js/cms/featureloader.js"></script>
+
   <script src="../assets/cms/js/project.js"></script>
   <script src="../assets/cms/js/utils.js"></script>
   <script src="../assets/cms/js/app.js"></script>

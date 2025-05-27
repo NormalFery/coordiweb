@@ -46,11 +46,11 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link active" href="../index.html#areas">ÁREAS <b class="caret"></b></a>
                         <div class="dropdown-menu dropdown-menu-left animate__animated animate__fadeInDown">
-                            <a class="dropdown-item text-white" href="integral.html">ATENCIÓN INTEGRAL</a>
-                            <a class="dropdown-item text-white" href="ocio.html">OCIO Y TIEMPO LIBRE</a>
+                            <a class="dropdown-item text-white" href="integral.php">ATENCIÓN INTEGRAL</a>
+                            <a class="dropdown-item text-white" href="ocio.php">OCIO Y TIEMPO LIBRE</a>
                             <a class="dropdown-item text-white" href="empleo.html">EMPLEO</a>
-                            <a class="dropdown-item text-white" href="Igualdad.html">MUJER E IGUALDAD</a>
-                            <a class="dropdown-item text-white" href="formacion.html">FORMACIÓN E INNOVACIÓN</a>
+                            <a class="dropdown-item text-white" href="Igualdad.php">MUJER E IGUALDAD</a>
+                            <a class="dropdown-item text-white" href="formacion.php">FORMACIÓN E INNOVACIÓN</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
@@ -117,189 +117,82 @@
                 La Coordinadora de Personas con Discapacidad Física de Canarias tiene varios proyectos relacionados con el área de Empleo para lograr la inserción laboral de personas con discapacidad:
             </p>
             <div id="featured-articles-container">
-            <!--<div class="row align-items-center">
-                <div id="featured-articles-container">
-                &lt;!&ndash; Estatutos &ndash;&gt;
-                <div class="col-md-6">
-                    <div class="service text-center align-items-center">
-                        <div class="info">
-                            <h1 class="title">Dracaena 14</h1>
-                            <h3>
-                                Programa experimental de empleo
-                            </h3>
-                            <p>El Proyecto Experimental de Empleo Dracaena 14 es un vehículo hacia la inserción social,
-                                a través de la búsqueda del empleo y con él, la búsqueda de un espacio para establecer un mayor número de vínculos con la sociedad.
-                                El número de participantes a incorporar en el Proyecto Dracaena 14 es de 92 personas con discapacidad desempleadas.
-                                Nuestro objetivo de inserción es, como mínimo, del 35% del total de las personas atendidas.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6" id="dracaena">
-                    <div class="service text-center">
-                        <div class="image">
-                            <img src="../assets/img/empleo/Dracaena_Crop.jpg" class="img-fluid rounded" alt="">
-                        </div>
-                    </div>
-                </div>
+                <?php
+                function renderLeft($k1, $k2, $k3, $k4): void {
+                    echo("<div class='card mb-3' style='max-width: 100%;'>");
+                    echo("<div class='row g-0'>");
+                    echo("<div class='col-md-4'>");
+                    echo("<img src='$k4' class='img-fluid rounded-start' alt='Imagen de ejemplo'>");
+                    echo("</div>");
+                    echo("<div class='col-md-8'>");
+                    echo("<div class='card-body'>");
+                    echo("<h5 class='card-title'>$k1</h5>");
+                    echo("<p class='card-text'>$k2</p>");
+                    echo("<p class='card-text'><small class='text-muted'>Última actualización $k3</small></p>");
+                    echo("<div class='d-flex'>");
+                    echo("<a href='#' class='btn btn-outline-primary me-2'>Leer más</a>");
+                    echo("</div>");
+                    echo("</div>");
+                    echo("</div>");
+                    echo("</div>");
+                    echo("</div>");
+                }
 
-                <div class="col-md-6">
-                    <div class="service text-center">
-                        <div class="info">
-                            <h1 class="title">Proyecto Aricia</h1>
-                            <h3 class="desc">
-                                Proyecto para apoyo a actividades en materia de Empleo realizadas por Entidades sin fines lucrativos
-                            </h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="service text-center" id="aricia">
-                        <div class="image">
-                            <img src="../assets/img/empleo/Arica_Cartel.png" class="img-fluid rounded" alt="">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="service text-center">
-                        <div class="info">
-                            <h1 class="title">Proyecto Sedal</h1>
-                            <h3>
-                                Proyecto de Intermediación laboral.
+                function renderRight($k1, $k2, $k3, $k4): void {
+                    echo("<div class='card mb-3' style='max-width: 100%;'>");
+                    echo("<div class='row g-0'>");
+                    echo("<div class='col-md-8'>");
+                    echo("<div class='card-body'>");
+                    echo("<h5 class='card-title'>$k1</h5>");
+                    echo("<p class='card-text'>$k2</p>");
+                    echo("<p class='card-text'><small class='text-muted'>Última actualización $k3</small></p>");
+                    echo("<div class='d-flex'>");
+                    echo("<a href='#' class='btn btn-outline-primary me-2'>Leer más</a>");
+                    echo("</div>");
+                    echo("</div>");
+                    echo("</div>");
+                    echo("<div class='col-md-4'>");
+                    echo("<img src='$k4' class='img-fluid rounded-start' alt='Imagen de ejemplo'>");
+                    echo("</div>");
+                    echo("</div>");
+                    echo("</div>");
+                }
 
-                            </h3>
-                            <p>El Proyecto SEDAL  es nuestro proyecto de Intermediación laboral.
-                                Es un vehículo hacia la inserción social de las personas con discapacidad, a través de la búsqueda del empleo y con él,
-                                la búsqueda de un espacio para establecer un mayor número de vínculos con la sociedad
-                                <br><br>
-                                El Proyecto SEDAL pretende seguir ofreciendo al colectivo de personas con discapacidad una respuesta a la demanda de empleo que sufre este colectivo
-                                de difícil inserción y que se ha visto agravado por los acontecimientos de los últimos años.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6" id="sedal">
-                    <div class="service text-center">
-                        <div class="image">
-                            <img src="../assets/img/empleo/Sedal_Logo.jpg" class="img-fluid rounded" alt="">
-                        </div>
-                    </div>
-                </div>
-                &lt;!&ndash; Ley Orgánica 1/2002 &ndash;&gt;
+                // CREDENCIALES DE PRUEBAS, NO PARA PRODUCCION
+                $username = "fery";
+                $password = "pruebas456";
+                // Nos conectamos a la BB.DD. con las credenciales especificadas anteriormente
+                $pdo = new PDO("mysql:host=localhost", $username, $password);
+                // Cambiamos los errores a Exceptions
+                $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                // Utilizamos la BB.DD. creada por cms_logic (SIEMPRE HAY QUE IR A CMS_LOGIC
+                $pdo->query("USE coordicms");
+                // Como solo tenemos una tabla por página, solo buscamos las cosas de dicha página
+                $tablas = ['empleo'];
 
-                <div class="col-md-6">
-                    <div class="service text-center">
-                        <div class="info">
-                            <h1 class="title">Proyecto Laurisilva</h1>
-                            <h4>
-                                Proyecto destinado al empleo de personas con discapacidad en la zona metropolitana de Tenerife.
-                                <br />
+                // Creamos un array para guardar todos los posts.
+                $allPosts = [];
 
-                            </h4>
-                            <p>El Proyecto LAURISILVA  es un proyecto destinado al empleo de las personas con discapacidad en la zona metropolitana de la Isla de Tenerife.
-                                <br>
-                                Se trata de un modelo integral para favorecer la inserción laboral de las personas con discapacidad,
-                                al tener en cuenta la formación para el empleo y los mecanismos para su integración
-                                <br><br>
+                // Vamos por cada tabla del array, y vamos guardando todos los resultados, combinandolos en el array.
+                foreach ($tablas as $tabla) {
+                    $stmt = $pdo->prepare("SELECT PostTitle, PostDescription, PostDate, ImageLink FROM $tabla");
+                    $stmt->execute();
+                    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    $allPosts = array_merge($allPosts, $rows);
+                }
 
-                                El Proyecto LAURISILVA  pretende seguir ofreciendo al colectivo de personas con discapacidad una respuesta a la demanda de empleo que sufre
-                                este colectivo de difícil inserción y que se ha visto agravado por los acontecimientos de los últimos años.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6" id="laurisilva">
-                    <div class="service text-center">
-                        <div class="image">
-                            <img src="../assets/img/empleo/Laurisilva-Logo.jpg" class="img-fluid rounded" alt="">
-                        </div>
-                    </div>
-                </div>
+                // Mejor lógica de izquierda y derecha.
+                $rightimage = false;
+                foreach ($allPosts as $post) {
+                    if ($rightimage) {
+                        renderRight($post['PostTitle'], $post['PostDescription'], $post['PostDate'], $post['ImageLink']);
+                    } else {
+                        renderLeft($post['PostTitle'], $post['PostDescription'], $post['PostDate'], $post['ImageLink']);
+                    }
+                    $rightimage = !$rightimage;
+                }
 
-                &lt;!&ndash; Ley 4/2003 &ndash;&gt;
-
-
-                    &lt;!&ndash; Decreto 12/2007 &ndash;&gt;
-                    <div class="col-md-6">
-                        <div class="service text-center">
-                            <div class="info">
-                                <h1 class="title">Proyecto Tarajal</h1>
-                                <h3>
-                                    Proyecto de Servicio Integral efectivo que promueve acciones encaminadas a la inserción.
-                                </h3>
-                                <p>El Proyecto Tarajal , ya que se trata de un servicio integral efectivo que promueve acciones encaminadas a la inserción,
-                                    en el que se ofrece atención especializada en pro de la inserción socio-laboral de las personas con discapacidad
-                                    en la zona sur de la isla de Tenerife <br><br>
-                                    El Proyecto TARAJAL pretende seguir ofreciendo al colectivo de personas con discapacidad una respuesta
-                                    a la demanda de empleo que sufre este colectivo de difícil inserción y
-                                    que se ha visto agravado por los acontecimientos de los últimos años.</p>
-                            </div>
-                        </div>
-                    </div>
-                <div class="col-md-6">
-                    <div class="service text-center" id="tarajal">
-                        <div class="image">
-                            <img src="../assets/img/empleo/Tarjal_Logo.jpg" class="img-fluid rounded" alt="">
-                        </div>
-                    </div>
-                </div>
-
-
-                    &lt;!&ndash; Leyes de Transparencia &ndash;&gt;
-                    <div class="col-md-6" id="habilis">
-                        <div class="service text-center">
-                            <div class="info">
-                                <h1 class="title">Proyecto Habilis</h1>
-                                <h3>
-                                    Proyecto con la finalidad de inserción laboral a personas con discapacidad.
-                                </h3>
-                                <p>
-                                    El Proyecto Habilis es un proyecto que tiene como finalidad la inserción laboral de personas con discapacidad,
-                                    especialmente de aquellas que tienen un difícil acceso al empleo,
-                                    gestionado por seis entidades especializadas en discapacidad: CoordiCanarias, Sinpromi, Funcasor, AFES, Inserta y Fundación Adecco.
-                                    <br><br>
-                                    Estas entidades forman una red que atiende a lo largo y ancho de la isla a través de las Unidades de Facilitación para el Empleo (UFE).
-                                    <br>Cada UFE cuenta con profesionales de la orientación laboral y del trabajo social,
-                                    y comparte con el resto de Unidades de Facilitación para el Empleo otras figuras profesionales especialistas en formación,
-                                    prospección de empleo e interpretación de lengua de signos. <br><br>La metodología del proyecto se caracteriza por diseñar y desarrollar itinerarios
-                                    personales de inserción laboral y por lo tanto por conseguir que la intervención sea centrada en la persona.
-                                    <br><br>    La UFE gestionada por Coordicanarias está situada en la calle Poeta Arístides Hernández Mora, s/n, Güímar;
-                                    y su área de acción son los municipios de Candelaria, Arafo, Güímar, Fasnia y Arico.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                <div class="col-md-6">
-                    <div class="service text-center">
-                        <div class="image">
-                            <img src="../assets/img/empleo/Habilis_Logo.png" class="img-fluid rounded" alt="">
-                        </div>
-                    </div>
-                </div>
-
-
-
-
-            </div>
-            <div id="team" class="content" data-scrollview="true">
-                &lt;!&ndash; begin container &ndash;&gt;
-                <div class="container">
-                    <h2 class="content-title">Responsable de Empleo</h2>
-                    <p class="content-desc">
-                        Descubre el responsable del area de Empleo en nuestro equipo.
-                    </p>
-                    &lt;!&ndash; begin row &ndash;&gt;
-                    <div class="row align-items-center justify-content-center">
-            <div class="col-md-6 col-lg-6 mb-4 align-items-middle">
-                <div class="team">
-                    <div class="image" data-animation="true" data-animation-type="animate__flipInX">
-                        <img src="../assets/img/user/nina.jpg" alt="La Nina" />
-                    </div>
-                    <div class="info">
-                        <h3 class="name">La Nina</h3>
-                        <div class="title text-theme">EMPLEO</div>
-                        <p>Responsable de coordinar los proyectos de empleo desarrollados por la entidad.</p>
-                    </div>
-                </div>
-            </div>-->
+                ?>
                     </div>
             </div> <!-- end row-->
 
@@ -474,7 +367,6 @@
 <script src="../assets/js/vendor.min.js"></script>
 <script src="../assets/js/app.js"></script>
 <script src="../assets/js/theme-panel-enhance.js"></script>
-    <script src="../assets/js/cms/featureloader.js"></script>
 <script src="../assets/cms/js/project.js"></script>
 <script src="../assets/cms/js/utils.js"></script>
 <script src="../assets/cms/js/app.js"></script>

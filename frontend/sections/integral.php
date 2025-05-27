@@ -45,10 +45,10 @@
                         <a class="nav-link active" href="../index.html#areas" data-click="scroll-to-target" data-scroll-target="#areas">ÁREAS <b class="caret"></b></a>
                         <div class="dropdown-menu dropdown-menu-left animate__animated animate__fadeInDown">
                             <a class="dropdown-item text-white" href="integral.html">ATENCIÓN INTEGRAL</a>
-                            <a class="dropdown-item text-white" href="ocio.html">OCIO Y TIEMPO LIBRE</a>
-                            <a class="dropdown-item text-white" href="empleo.html">EMPLEO</a>
-                            <a class="dropdown-item text-white" href="Igualdad.html">MUJER E IGUALDAD</a>
-                            <a class="dropdown-item text-white" href="formacion.html">FORMACIÓN E INNOVACIÓN</a>
+                            <a class="dropdown-item text-white" href="ocio.php">OCIO Y TIEMPO LIBRE</a>
+                            <a class="dropdown-item text-white" href="empleo.php">EMPLEO</a>
+                            <a class="dropdown-item text-white" href="Igualdad.php">MUJER E IGUALDAD</a>
+                            <a class="dropdown-item text-white" href="formacion.php">FORMACIÓN E INNOVACIÓN</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
@@ -123,350 +123,82 @@
                 para mejorar la percepción de la calidad de vida de las personas con discapacidad a través de una atención integral, como:
             </p>
             <div id="featured-articles-container">
-            <!--<div class="row align-items-center">
-                &lt;!&ndash; Estatutos &ndash;&gt;
-                <div class="col-md-6" id="activados23">
-                    <div class="service text-center align-items-center">
-                        <div class="info">
-                            <h1 class="title">Activados 2023</h1>
-                            <h3>
-                                Proyecto de continuidad
-                            </h3>
-                            <p>PEl proyecto ACTIVAD@S 2023, se presenta como un proyecto de continuidad que en la anterior convocatoria tuvo gran relevancia y
-                                aceptación por parte de las personas beneficiarias, personas con discapacidad o dependencia, además de acciones con las familias y
-                                personas cuidadoras,
-                                <br>
-                                <br>
-                                Los servicios puestos en marcha contribuyen a una acción recuperadora global de la persona, trabajando la rehabilitación física,
-                                el desarrollo personal, las relaciones sociales, la formación, la búsqueda de recursos; incidiendo en el ámbito personal y
-                                del entorno social de las personas usuarias, trabajando las relaciones establecidas con familiares, amigos, cuidadores, etc.,
-                                y apoyando en el proceso de fomento de la autonomía personal y el autocuidado. Ambos aspectos buscando el desarrollo y bienestar
-                                integral de la persona y su entorno.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="service text-center">
-                        <div class="image">
-                            <img src="../assets/img/atencion-integral/activados-23.jpeg" class="img-fluid rounded" alt="">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="service text-center">
-                        <div class="info">
-                            <h1 class="title">Cuidate 2024</h1>
-                            <h4>
-                                Proyecto para la mejora de la autonomía personal e incremento del bienestar físico y emocional
-                                <br />
+                <?php
+                function renderLeft($k1, $k2, $k3, $k4): void {
+                    echo("<div class='card mb-3' style='max-width: 100%;'>");
+                    echo("<div class='row g-0'>");
+                    echo("<div class='col-md-4'>");
+                    echo("<img src='$k4' class='img-fluid rounded-start' alt='Imagen de ejemplo'>");
+                    echo("</div>");
+                    echo("<div class='col-md-8'>");
+                    echo("<div class='card-body'>");
+                    echo("<h5 class='card-title'>$k1</h5>");
+                    echo("<p class='card-text'>$k2</p>");
+                    echo("<p class='card-text'><small class='text-muted'>Última actualización $k3</small></p>");
+                    echo("<div class='d-flex'>");
+                    echo("<a href='#' class='btn btn-outline-primary me-2'>Leer más</a>");
+                    echo("</div>");
+                    echo("</div>");
+                    echo("</div>");
+                    echo("</div>");
+                    echo("</div>");
+                }
 
-                            </h4>
-                            <p>
-                                Proyecto destinado a la mejora de la autonomía personal y al incremento del bienestar físico y emocional
-                                <br>
-                            <ul>
-                                <li>Sesiones de tratamiento psicológico</li>
+                function renderRight($k1, $k2, $k3, $k4): void {
+                    echo("<div class='card mb-3' style='max-width: 100%;'>");
+                    echo("<div class='row g-0'>");
+                    echo("<div class='col-md-8'>");
+                    echo("<div class='card-body'>");
+                    echo("<h5 class='card-title'>$k1</h5>");
+                    echo("<p class='card-text'>$k2</p>");
+                    echo("<p class='card-text'><small class='text-muted'>Última actualización $k3</small></p>");
+                    echo("<div class='d-flex'>");
+                    echo("<a href='#' class='btn btn-outline-primary me-2'>Leer más</a>");
+                    echo("</div>");
+                    echo("</div>");
+                    echo("</div>");
+                    echo("<div class='col-md-4'>");
+                    echo("<img src='$k4' class='img-fluid rounded-start' alt='Imagen de ejemplo'>");
+                    echo("</div>");
+                    echo("</div>");
+                    echo("</div>");
+                }
 
-                                <li>Servicio de rehabilitación física y mantenimiento.</li>
-                                <li>Talleres de psicomotricidad terapéutica.</li>
+                // CREDENCIALES DE PRUEBAS, NO PARA PRODUCCION
+                $username = "fery";
+                $password = "pruebas456";
+                // Nos conectamos a la BB.DD. con las credenciales especificadas anteriormente
+                $pdo = new PDO("mysql:host=localhost", $username, $password);
+                // Cambiamos los errores a Exceptions
+                $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                // Utilizamos la BB.DD. creada por cms_logic (SIEMPRE HAY QUE IR A CMS_LOGIC
+                $pdo->query("USE coordicms");
+                // Como solo tenemos una tabla por página, solo buscamos las cosas de dicha página
+                $tablas = ['atencion'];
 
-                                <li>Talleres de formación en cuidado y hábitos de vida saludable para personas con discapacidad y cuidadores/as..</li>
+                // Creamos un array para guardar todos los posts.
+                $allPosts = [];
 
-                                <li>Talleres de autoestima, cuidado e imagen personal dirigido a personas con discapacidad</li>
+                // Vamos por cada tabla del array, y vamos guardando todos los resultados, combinandolos en el array.
+                foreach ($tablas as $tabla) {
+                    $stmt = $pdo->prepare("SELECT PostTitle, PostDescription, PostDate, ImageLink FROM $tabla");
+                    $stmt->execute();
+                    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    $allPosts = array_merge($allPosts, $rows);
+                }
 
-                                <li>Salidas de ocio y tiempo libre y actividades lúdicas.</li>
-                            </ul>
+                // Mejor lógica de izquierda y derecha.
+                $rightimage = false;
+                foreach ($allPosts as $post) {
+                    if ($rightimage) {
+                        renderRight($post['PostTitle'], $post['PostDescription'], $post['PostDate'], $post['ImageLink']);
+                    } else {
+                        renderLeft($post['PostTitle'], $post['PostDescription'], $post['PostDate'], $post['ImageLink']);
+                    }
+                    $rightimage = !$rightimage;
+                }
 
-                        </div>
-                    </div>
-                </div>
-                &lt;!&ndash; Ley Orgánica 1/2002 &ndash;&gt;
-                <div class="col-md-6" id="cuidate24">
-                    <div class="service text-center">
-                        <div class="image">
-                            <img src="../assets/img/atencion-integral/cuidate-logo.png" class="img-fluid rounded" alt="">
-                        </div>
-                    </div>
-                </div>
-
-
-                &lt;!&ndash; Ley 4/2003 &ndash;&gt;
-                <div class="col-md-6" id="autonomia">
-                    <div class="service text-center">
-                        <div class="info">
-                            <h1 class="title">Autonomía Personal y Cuidados</h1>
-                            <h3>
-                                Proyecto de Autonomía Personal y Cuidados
-
-                            </h3>
-                            <p>El Proyecto de Autonomía Personal y Cuidados subvencionado por la Consejería de Derechos Sociales del Gobierno de Canarias,
-                                está destinado a favorecer la autonomía de las personas con discapacidad a través de actividades de mejora de la vida diaria,
-                                servicios de rehabilitación y apoyo psicológico.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="service text-center">
-                        <div class="image">
-                            <img src="../assets/img/atencion-integral/autonomia-23.jpg" class="img-fluid rounded" alt="">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="service text-center">
-                        <div class="info">
-                            <h1 class="title">La Estancia</h1>
-                            <h4>
-                                Proyecto para la autonomía personal de personas con discapacidad en La Laguna
-                                <br />
-
-                            </h4>
-                            <p>La Estancia 2024, un proyecto para la autonomía personal de las personas con discapacidad subvencionado por el
-                                Área de Bienestar Social del Ayuntamiento de San Cristóbal de La Laguna. Si tienes discapacidad y vives en La Laguna puedes
-                                disfrutar de nuestros talleres y servicios de atención integral.
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6" id="estancia">
-                    <div class="service text-center">
-                        <div class="image">
-                            <img src="../assets/img/atencion-integral/estancia.jpg" class="img-fluid rounded" alt="">
-                        </div>
-                    </div>
-                </div>
-
-                &lt;!&ndash; Ley 4/2003 &ndash;&gt;
-                <div class="col-md-6" id="salvia">
-                    <div class="service text-center">
-                        <div class="info">
-                            <h1 class="title">Proyecto Salvia</h1>
-                            <h3>
-                                Proyecto que responde a las siguientes líneas del Programa de Lucha Contra La Pobreza y la Exclusión Social:
-
-                            </h3>
-                            <p>El Proyecto SALVIA responde a las siguientes líneas de actuación dentro del Programa de Lucha Contra La Pobreza y la Exclusión Social:
-                            <ol>
-                            <li>Reforzar el sistema de atención a la dependencia a través de teleasistencia, ayuda a domicilio, etc.</li>
-                            <li>Programas de inclusión social a través de actividades culturales, desarrollo comunitario y participación social.</li>
-                            <li>Programas de información, orientación y acompañamiento que faciliten o favorezcan el ejercicio de derechos sociales tales como la salud,
-                                la educación y cultura de personas o colectivos en riesgo de pobreza y/o exclusión social, en situación de vulnerabilidad.</li>
-                        </ol>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="service text-center">
-                        <div class="image">
-                            <img src="../assets/img/atencion-integral/salvia-logo.png" class="img-fluid rounded" alt="">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="service text-center">
-                        <div class="info">
-                            <h1 class="title">Proyecto de la Autonomía Personal y Desenvolvimiento en el Entorno</h1>
-                            <h4>
-                               Proyecto para fomentar derechos de personas con discapacidad
-                                <br />
-
-                            </h4>
-                            <p>Este proyecto se desarrolla a través de la convocatoria de subvenciones mediante el procedimiento de concurrencia competitiva
-                                destinadas a la ejecución de proyectos que fomenten los derechos de las personas con discapacidad y personas en situación de dependencia.
-                                aprobado mediante Orden de la Consejeria de Bienestar Social, Iguadad, Juventud, Infancia y Familia  de 16 de octubre de 2023.
-<br>
-                                <br>
-                                Está destinado a la persona dependiente, y a través del mismo se ofrece un servicio de cuidados personales en el domicilio,
-                                a través de la asistencia de un/a auxiliar de apoyo que colabora en la realización de sus actividades básicas y/o cotidianas:
-                                aseo (servicio de higiene personal), alimentación (ayuda y supervisión en la ingesta de alimentos, etc.) y
-                                desenvolvimiento (estimulación de capacidades cognitivas y físicas para favorecer una autonomía personal como apoyo en la calle, paseos, etc.)
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6" id="personal23">
-                    <div class="service text-center">
-                        <div class="image">
-                            <img src="../assets/img/atencion-integral/desenvuelto.jpg" class="img-fluid rounded" alt="">
-                        </div>
-                    </div>
-                </div>
-
-                &lt;!&ndash; Ley 4/2003 &ndash;&gt;
-                <div class="col-md-6" id="soledad">
-                    <div class="service text-center">
-                        <div class="info">
-                            <h1 class="title">SOS Soledad</h1>
-                            <h3>
-                                Proyecto destinado a la toma de conciencia sobre la soledad no deseada
-
-                            </h3>
-                            <p>SOS Soledad ofrece apoyo psicosocial basado en comunicación constante con la persona beneficiaria
-                            , para disminuir los efectos negativos de la soledad y el aislamiento, con un servicio de intervención
-                            , escucha, y acompañamiento casi a diario</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="service text-center">
-                        <div class="image">
-                            <img src="../assets/img/atencion-integral/soledad-cartel.jpg" class="img-fluid rounded" alt="">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="service text-center">
-                        <div class="info">
-                            <h1 class="title">Atención Integral 2024</h1>
-                            <h4>
-                                Proyecto emblemático de la asociación
-                                <br />
-
-                            </h4>
-                            <p>Desde el ejercicio 2019-2020
-                                la Coordinadora ha unido en el proyecto ATENCIÓN INTEGRAL PARA PERSONAS CON DISCAPACIDAD dos proyectos emblemáticos
-                                de la asociación, Ocio y Tiempo Libre y Rehabilitación Preventiva con el fin de mejorar el servicio a nuestros usuarios.
-                                <br>
-                                <br>
-                                Este proyecto, financiado por el Servicio Canario de Empleo, tiene una duración de nueve meses,
-                                en el que se proponen acciones que mejoren la calidad de vida de las personas con discapacidad a través de una atención integral
-                                basada en terapias de rehabilitación física, mental y afectivo/social, consiguiendo así la normalización social y
-                                el bienestar general de la persona.
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6" id="atencion24">
-                    <div class="service text-center">
-                        <div class="image">
-                            <img src="../assets/img/atencion-integral/integral-logo.jpg" class="img-fluid rounded" alt="">
-                        </div>
-                    </div>
-                </div>
-                &lt;!&ndash; Ley 4/2003 &ndash;&gt;
-                <div class="col-md-6" id="gabinete">
-                    <div class="service text-center">
-                        <div class="info">
-                            <h1 class="title">Gabinete de Trabajo Social</h1>
-                            <h3>
-                                Proyecto para establecer un modelo basado en intervención centrada en la persona
-
-                            </h3>
-                            <p>En el área de Trabajo Social se pretende establecer un modelo basado en una intervención centrada en la persona con discapacidad
-                                atendiendo sus problemáticas contextuales y sociales que sirvan para garantizar su autodeterminación y mejorar su calidad de vida.
-                                También, se aplica un enfoque participativo en el núcleo familiar, siendo este un pilar fundamental en el desarrollo de la misma.
-                                <br>
-                                <br>
-                                Así mismo, se procura dar asesoramiento y/o orientación de aquellos aspectos que puedan ser de utilidad para el bienestar social
-                                de la persona. Se establecerá una sinergia tanto con los recursos internos que pueda ofrecer la entidad cómo los recursos externos
-                                con otras entidades y/o administraciones públicas.
-                                <br>
-                                <br>
-                                Este gabinete especializado se desarrolla de forma continua durante todo el año.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="service text-center">
-                        <div class="image">
-                            <img src="../assets/img/atencion-integral/gabinete-ph.jpg" class="img-fluid rounded" alt="">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="service text-center">
-                        <div class="info">
-                            <h1 class="title">Desenvolvimiento Personal</h1>
-                            <h4>
-                                Proyecto de acompañamiento invididual fuera del domicilio
-                                <br />
-
-                            </h4>
-                            <p>Este servicio se lleva a cabo de manera puntual,
-                                a solicitud de la persona interesada, para realizar un acompañamiento individualizado fuera del domicilio
-                                para su desenvolvimiento cotidiano, favoreciendo así su autonomía. Engloba una gran variedad de acciones como paseos,
-                                gestiones de cualquier tipo, visitas médicas, etc.
-                                <br>
-                                <br>
-                                A lo largo del año se benefician de este proyecto un gran número de personas,
-                                principalmente de la zona metropolitana (Santa Cruz y La Laguna).
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6" id="desenvuelto">
-                    <div class="service text-center">
-                        <div class="image">
-                            <img src="../assets/img/atencion-integral/desenvuelto-personal.jpg" class="img-fluid rounded" alt="">
-                        </div>
-                    </div>
-                </div>
-                &lt;!&ndash; Ley 4/2003 &ndash;&gt;
-                <div class="col-md-6" id="psicologo">
-                    <div class="service text-center">
-                        <div class="info">
-                            <h1 class="title">Apoyo Psicológico</h1>
-                            <h3>
-                                Sesiones de terapia para adultos
-
-                            </h3>
-                            <p>Este proyecto se lleva a cabo en virtud de un convenio de colaboración entre Psicólogos sin Fronteras y CoordiCanarias,
-                                que permite ofrecer a aquellas personas con discapacidad que lo han solicitado, un servicio de terapia psicológica.
-                                <br>
-                                <br>
-                                El tratamiento psicológico propuesto consiste en sesiones de terapia de adultos para ayudar a afrontar las dificultades
-                                y los problemas con los que nos enfrentamos en nuestro día a día. Se trata de una ayuda especializada temporal que tiene una
-                                temporalización de cuatro meses, y que ha atendido a las particularidades de las personas asociadas.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="service text-center">
-                        <div class="image">
-                            <img src="../assets/img/atencion-integral/psicologo-ph.png" class="img-fluid rounded" alt="">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="service text-center">
-                        <div class="info">
-                            <h1 class="title">Préstamo de Ayudas Técnicas</h1>
-                            <h4>
-                                Servicio de asesoramiento, préstamo y reparación de ayudas técnicas
-                                <br />
-
-                            </h4>
-                            <p>Con este servicio se pretende facilitar y apoyar, en momentos puntuales, las necesidades de las personas con movilidad reducida,
-                                ofreciendo material ortoprotésico para su desenvolvimiento, conocimiento y experimentación.
-                                <br>
-                                <br>
-                                Por otro lado, CoordiCanarias mantiene un convenio de colaboración con la empresa EGTFarma,
-                                una entidad dedicada a la reparación y mantenimiento de ayudas técnicas, cuyo objetivo es que nuestros usuarios se beneficien
-                                de un servicio de asistencia a domicilio, asesoramiento, adaptación, reparación y orientación sobre las soluciones necesarias para facilitar
-                                sus actividades de la vida diaria.
-                                <br>
-                                <br>
-                                En virtud de este acuerdo, cualquier asociado que necesite orientación sobre ayudas técnicas podrá recibir de manera gratuita
-                                la visita de un técnico que le ofrezca la alternativa personalizada adecuada a su situación y a su discapacidad.
-                                El convenio también incluye el préstamo temporal de elementos (sillas de ruedas, andadores, etc), la búsqueda de facilidades de pago y
-                                un servicio postventa que incluye reparación y atendimiento.
-                                <br>
-                                <br>
-                                Los interesados en hacer uno de este servicio, tendrán que contactar con CoordiCanarias por telefono
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6" id="tecnicas">
-                    <div class="service text-center">
-                        <div class="image">
-                            <img src="../assets/img/atencion-integral/ayuda-tecnica.jpg" class="img-fluid rounded" alt="">
-                        </div>
-                    </div>
-                </div>
+                ?>
 -->
             </div>
             <div id="team" class="content" data-scrollview="true">
@@ -667,7 +399,7 @@
     <script src="../assets/js/app.js"></script>
     <script src="../assets/js/theme-panel-enhance.js"></script>
 
-    <script src="../assets/js/cms/featureloader.js"></script>
+
     <script src="../assets/cms/js/project.js"></script>
     <script src="../assets/cms/js/utils.js"></script>
     <script src="../assets/cms/js/app.js"></script>

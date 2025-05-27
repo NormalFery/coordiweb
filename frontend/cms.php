@@ -103,6 +103,7 @@
                 echo("<p class='card-text'>$k2</p>");
                 echo("<p class='card-text'><small class='text-muted'>Última actualización $k3</small></p>");
                 echo("<div class='d-flex'>");
+                echo("<a href='#' class='btn btn-outline-primary me-2'>Leer más</a>");
                 echo("<button type='submit' name='delete_button' class='btn btn-outline-danger btn-delete-featured'>");
                 echo("<i class='fas fa-trash'></i>");
                 echo("</button>");
