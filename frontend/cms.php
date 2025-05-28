@@ -64,6 +64,8 @@
         <!-- Contenedor para Proyectos destacados -->
         <div id="featured-articles-container">
             <?php
+            require_once './cms_logic.php';
+
             function renderLeft($k1, $k2, $k3, $k4, $k5, $k6): void {
                 echo("<form method='POST'>"); // <-- FORMULARIO
                 echo("<input type='hidden' name='post_id' value='$k5'>");
@@ -119,11 +121,6 @@
                 echo("</form>");
             }
 
-
-            // Por si acaso, requerimos la lógica de CMS también
-            require_once './cms_logic.php';
-
-
             // CREDENCIALES DE PRUEBAS, NO PARA PRODUCCION
              $username = "fery";
             $password = "pruebas456";
@@ -178,66 +175,7 @@
             ?>
     </section>
 
-    <!-- Sección de tarjetas dinámicas (agregadas por el usuario) -->
-    <section class="mb-5">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2>Proyectos</h2>
-            <button type="button" id="addProjectBtn" class="btn btn-success btn-add-project" data-bs-toggle="modal" data-bs-target="#newCardModal">
-                <i class="fas fa-plus"></i> Agregar Proyecto
-            </button>
-        </div>
 
-        <!-- Grid de 3 columnas para las tarjetas dinámicas -->
-        <div class="row" id="dynamic-cards-container">
-            <!-- Aquí se insertarán dinámicamente las tarjetas creadas por el usuario -->
-            <!-- Ejemplo de las tarjetas de la imagen de muestra -->
-            <div class="col-md-4 mb-4">
-                <div class="card h-100 border">
-                    <img src="assets/img/" class="card-img-top" alt="Laurisilva Proyecto">
-                    <div class="card-body">
-                        <h5 class="card-title">Proyecto 1</h5>
-                        <p class="card-text">Un breve ejemplo de contenido para construir sobre el título de la tarjeta.</p>
-                        <div class="d-flex justify-content-between">
-                            <a href="#" class="btn btn-primary">Leer más</a>
-                            <button class="btn btn-danger btn-delete-card" data-id="project1">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="card h-100 border">
-                    <img src="assets/img/" class="card-img-top" alt="Proyecto SEDA">
-                    <div class="card-body">
-                        <h5 class="card-title">Proyecto 2</h5>
-                        <p class="card-text">Otro ejemplo de contenido interesante para esta tarjeta.</p>
-                        <div class="d-flex justify-content-between">
-                            <a href="#" class="btn btn-primary">Leer más</a>
-                            <button class="btn btn-danger btn-delete-card" data-id="project2">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="card h-100 border">
-                    <img src="assets/img" class="card-img-top" alt="Proyecto Tarajal">
-                    <div class="card-body">
-                        <h5 class="card-title">Proyecto 3</h5>
-                        <p class="card-text">Un ejemplo más de contenido para esta tarjeta de proyecto.</p>
-                        <div class="d-flex justify-content-between">
-                            <a href="#" class="btn btn-primary">Leer más</a>
-                            <button class="btn btn-danger btn-delete-card" data-id="project3">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 </main>
 
 <!-- Footer simplificado -->
